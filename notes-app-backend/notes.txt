@@ -1,0 +1,158 @@
+struktur
+{
+ id: string,
+ title: string,
+ createdAt: string,
+ updatedAt: string,
+ tags: array of string,
+ body: string,
+},
+
+contoh data nyatanya
+{
+ id: 'notes-V1StGXR8_Z5jdHi6B-myT',
+ title: 'Sejarah JavaScript',
+ createdAt: '2020-12-23T23:00:09.686Z',
+ updatedAt: '2020-12-23T23:00:09.686Z',
+ tags: ['NodeJS', 'JavaScript'],
+ body: 'JavaScript pertama kali dikembangkan oleh Brendan Eich dari Netscape di bawah nama Mocha, yang nantinya namanya diganti menjadi LiveScript, dan akhirnya menjadi JavaScript. Navigator sebelumnya telah mendukung Java untuk lebih bisa dimanfaatkan para pemrogram yang non-Java.',
+},
+
+Endpoint POST <url>/notes/
+
+Request Body:
+{
+ "title": "Judul Catatan",
+ "tags": ["Tag 1", "Tag 2"],
+ "body": "Konten catatan"
+}
+
+Response 201:
+{
+  "status": "success",
+  "message": "Catatan berhasil ditambahkan",
+  "data": {
+    "noteId": "V09YExygSUYogwWJ"
+  }
+}
+
+Response failed 500:
+{
+  "status": "error",
+  "message": "Catatan gagal untuk ditambahkan"
+}
+
+Endpoint GET <url>/notes 
+untuk mendapatkan seluruh data notes
+
+{
+  "status": "success",
+  "data": {
+    "notes": [
+      {
+        "id":"notes-V1StGXR8_Z5jdHi6B-myT",
+        "title":"Catatan 1",
+        "createdAt":"2020-12-23T23:00:09.686Z",
+        "updatedAt":"2020-12-23T23:00:09.686Z",
+        "tags":[
+          "Tag 1",
+          "Tag 2"
+        ],
+        "body":"Isi dari catatan 1"
+      },
+      {
+        "id":"notes-V1StGXR8_98apmLk3mm1",
+        "title":"Catatan 2",
+        "createdAt":"2020-12-23T23:00:09.686Z",
+        "updatedAt":"2020-12-23T23:00:09.686Z",
+        "tags":[
+          "Tag 1",
+          "Tag 2"
+        ],
+        "body":"Isi dari catatan 2"
+      }
+    ]
+  }
+}
+
+notes kosong
+{
+  "status": "success",
+  "data": {
+    "notes": []
+  }
+}
+
+Endpoint GET <url>/notes/(:user_id)
+
+Response Success 200:
+{
+  "status": "success",
+  "data": {
+    "note": {
+      "id":"notes-V1StGXR8_Z5jdHi6B-myT",
+      "title":"Catatan 1",
+      "createdAt":"2020-12-23T23:00:09.686Z",
+      "updatedAt":"2020-12-23T23:00:09.686Z",
+      "tags":[
+        "Tag 1",
+        "Tag 2"
+      ],
+      "body":"Isi dari catatan 1"
+    }
+  }
+}
+
+Response Failed 404:
+
+{
+  "status": "fail",
+  "message": "Catatan tidak ditemukan"
+}
+
+Endpoint PUT <url>/notes/(:user_id)
+
+Request Body:
+{
+  "title":"Judul Catatan Revisi",
+  "tags":[
+    "Tag 1",
+    "Tag 2"
+  ],
+  "body":"Konten catatan"
+}
+
+Reponse body 200:
+{
+  "status": "success",
+  "message": "Catatan berhasil diperbaharui"
+}
+
+Response body 404:
+{
+  "status": "fail",
+  "message": "Gagal memperbarui catatan. Id catatan tidak ditemukan"
+}
+
+Endpoint DELETE <url>/notes/(:user_id)
+
+Reponse body 200:
+{
+  "status": "success",
+  "message": "Catatan berhasil dihapus"
+}
+
+Response body 404:
+{
+  "status": "fail",
+  "message": "Catatan gagal dihapus. Id catatan tidak ditemukan"
+}
+
+NOTE : 
+buat src folder 
+server.js : Memuat kode untuk membuat, mengonfigurasi, dan menjalankan server HTTP menggunakan Hapi.
+routes.js : Memuat kode konfigurasi routing server seperti menentukan path, method, dan handler yang digunakan.
+handler.js : Memuat seluruh fungsi-fungsi handler yang digunakan pada berkas routes.
+notes.js : Memuat data notes yang disimpan dalam bentuk array objek.
+
+web Server API | change URL, host:port
